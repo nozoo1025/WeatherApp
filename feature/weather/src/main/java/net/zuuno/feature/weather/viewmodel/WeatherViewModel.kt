@@ -47,7 +47,7 @@ class WeatherViewModel @Inject constructor(
 
         is Fetched -> previousState.copy(
             isLoading = false,
-            weatherData = partialState.list,
+            weatherData = partialState.weatherData,
             isError = false,
         )
 
@@ -61,7 +61,7 @@ class WeatherViewModel @Inject constructor(
         getWeatherDataUseCase()
             .map { result ->
                 when (result) {
-                    is AppResult.Success -> Fetched(result.data.toPresentationModel())
+                    is AppResult.Success -> Fetched(result.data?.toPresentationModel())
                     is AppResult.Error -> Error(result.exception)
                     is AppResult.Loading -> Loading
                 }

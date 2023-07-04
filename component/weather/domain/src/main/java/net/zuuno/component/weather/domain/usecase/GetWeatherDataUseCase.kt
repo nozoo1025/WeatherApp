@@ -12,13 +12,13 @@ import java.io.IOException
 
 private const val RETRY_TIME_IN_MILLIS = 15_000L
 
-fun interface GetWeatherDataUseCase : () -> Flow<AppResult<WeatherData>>
+fun interface GetWeatherDataUseCase : () -> Flow<AppResult<WeatherData?>>
 
 fun getWeatherData(
     weatherDataRepository: WeatherDataRepository,
-): Flow<AppResult<WeatherData>> {
+): Flow<AppResult<WeatherData?>> {
     return weatherDataRepository.getWeatherData()
-        .map<WeatherData, AppResult<WeatherData>> { AppResult.Success(it) }
+        .map<WeatherData?, AppResult<WeatherData?>> { AppResult.Success(it) }
         .retryWhen { cause, _ ->
             if (cause is IOException) {
                 emit(AppResult.Error(cause))

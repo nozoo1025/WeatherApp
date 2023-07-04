@@ -46,6 +46,8 @@ android {
 dependencies {
 
     implementation(project(":feature:weather"))
+    implementation(project(":component:weather:data"))
+
     implementation(libs.androidx.compose.material3)
     api(libs.androidx.compose.ui.tooling.preview)
 

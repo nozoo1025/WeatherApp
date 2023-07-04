@@ -2,8 +2,6 @@ package net.zuuno.feature.weather.viewmodel
 
 import android.os.Parcelable
 import androidx.compose.runtime.Immutable
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.parcelize.Parcelize
 import net.zuuno.feature.weather.model.WeatherDataDisplayable
 
@@ -18,7 +16,7 @@ data class WeatherUiState(
     sealed class PartialState {
         object Loading : PartialState()
 
-        data class Fetched(val list: WeatherDataDisplayable) : PartialState()
+        data class Fetched(val weatherData: WeatherDataDisplayable?) : PartialState()
 
         data class Error(val throwable: Throwable) : PartialState()
     }

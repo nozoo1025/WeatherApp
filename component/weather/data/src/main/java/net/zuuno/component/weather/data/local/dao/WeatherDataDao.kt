@@ -10,8 +10,8 @@ import net.zuuno.component.weather.data.local.model.WeatherDataCached
 interface WeatherDataDao {
 
     @Query("SELECT * FROM WeatherDataCached LIMIT 1")
-    fun getWeatherData(): Flow<WeatherDataCached>
+    fun getWeatherData(): Flow<WeatherDataCached?>
 
     @Upsert
-    suspend fun saveWeatherData(weatherData: List<WeatherDataCached>)
+    suspend fun saveWeatherData(weatherData: WeatherDataCached)
 }
